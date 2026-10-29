@@ -1,0 +1,31 @@
+body {
+  position: relative;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.spider {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  transition: transform 0.5s ease-in-out, top 0.5s linear, left 0.5s linear;
+}
+
+.body {
+  width: 12px;
+  height: 12px;
+  background-color: #111;
+  border-radius: 50%;
+  margin: 6px auto;
+}
+
+/* Leg scuttle animation */
+@keyframes scuttle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+.spider.moving {
+  animation: scuttle 0.15s infinite alternate;
+}
