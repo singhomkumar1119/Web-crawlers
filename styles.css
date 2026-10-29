@@ -1,31 +1,84 @@
 body {
-  position: relative;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
   min-height: 100vh;
-  font-family: sans-serif;
+  overflow-x: hidden;
 }
 
-.spider {
+#content {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.target-node {
+  margin: 25px 0;
+  line-height: 1.6;
+  display: block;
+  opacity: 0.85;
+}
+
+h1.target-node {
+  color: #58a6ff;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 10px;
+}
+
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+a.target-node {
+  color: #58a6ff;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+/* absolute positioning container for custom spider rendering coordinates */
+#crawler-spider {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 60px;
+  height: 60px;
+  z-index: 10000;
   pointer-events: none;
-  transition: transform 0.5s ease-in-out, top 0.5s linear, left 0.5s linear;
+  left: 0;
+  top: 0;
+  transform-origin: 50% 38%;
+  /* Cubic-bezier curve smooths out the skittering momentum stops */
+  transition: left 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), 
+              top 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), 
+              transform 0.4s ease-out;
 }
 
-.body {
-  width: 12px;
-  height: 12px;
-  background-color: #111;
-  border-radius: 50%;
-  margin: 6px auto;
+/* --- High-Frequency Reel Scuttle Motion --- */
+@keyframes leftLegWave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(14deg) translateY(-2px); }
 }
 
-/* Leg scuttle animation */
-@keyframes scuttle {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(5deg); }
+@keyframes rightLegWave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-14deg) translateY(-2px); }
 }
 
-.spider.moving {
-  animation: scuttle 0.15s infinite alternate;
+/* Alternate micro-movements on active navigation frames */
+#crawler-spider.walking .left-leg-1,
+#crawler-spider.walking .left-leg-3,
+#crawler-spider.walking .right-leg-2,
+#crawler-spider.walking .right-leg-4 {
+  transform-origin: 50% 50%;
+  animation: leftLegWave 0.12s infinite linear;
+}
+
+#crawler-spider.walking .left-leg-2,
+#crawler-spider.walking .left-leg-4,
+#crawler-spider.walking .right-leg-1,
+#crawler-spider.walking .right-leg-3 {
+  transform-origin: 50% 50%;
+  animation: rightLegWave 0.12s infinite linear;
 }
