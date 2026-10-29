@@ -1,27 +1,55 @@
-const spider = document.getElementById('spider');
-const targets = document.querySelectorAll('.target-line');
+const spider = document.getElementById('crawler-spider');
+const nodes = document.querySelectorAll('.target-node');
+let currentNodeIndex = 0;
+let lastX = window.innerWidth / 2;
+let lastY = 100;
 
-function crawlToElement(element) {
-  const rect = element.getBoundingClientRect();
+function executeCrawlIteration() {
+  if (nodes.length === 0 || !spider) return;
+
+  const currentTarget = nodes[currentNodeIndex];
+  const rect = currentTarget.getBoundingClientRect();
+
+  // Pick a realistic bounding coordinate inside the target text element
+  const destinationX = rect.left + window.scrollX + (rect.width * 0.2);
+  const destinationY = rect.top + window.scrollY + (rect.height / 2) - 25;
+
+  // Calculate direction angle to turn the spider body towards the text node
+  const deltaX = destinationX - lastX;
+  const deltaY = destinationY - lastY;
+  const angleDegrees = (Math.atan2(deltaY, deltaX) * 180 / Math.PI) - 90;
+
+  // Apply walking animations and translation metrics
+  spider.style.transform = `rotate(${angleDegrees}deg)`;
+  spider.classList.add('walking');
   
-  // Calculate position relative to the document
-  const targetX = rect.left + window.scrollX + (rect.width / 2);
-  const targetY = rect.top + window.scrollY - 15; // Sit slightly above the text
+  spider.style.left = `${destinationX}px`;
+  spider.style.top = `${destinationY}px`;
 
-  spider.classList.add('moving');
-  spider.style.left = `${targetX}px`;
-  spider.style.top = `${targetY}px`;
+  // Retain positional history matrix
+  lastX = destinationX;
+  lastY = destinationY;
 
+  // Halt step rotations when destination interpolation completes
   setTimeout(() => {
-    spider.classList.remove('moving');
-  }, 500); // Match CSS transition duration
+    spider.classList.remove('walking');
+  }, 1200);
+
+  // Queue next index path traversal sequence
+  currentNodeIndex = (currentNodeIndex + 1) % nodes.length;
 }
 
-// Example: Cycle through target elements every 2 seconds
-let index = 0;
-setInterval(() => {
-  if (targets.length > 0) {
-    crawlToElement(targets[index]);
-    index = (index + 1) % targets.length;
+// Initial engine activation sequence
+window.addEventListener('load', () => {
+  // Seat spider instantly on layout initialization frame
+  if(nodes.length > 0) {
+    const startRect = nodes[0].getBoundingClientRect();
+    lastX = startRect.left + window.scrollX + 20;
+    lastY = startRect.top + window.scrollY - 30;
+    spider.style.left = `${lastX}px`;
+    spider.style.top = `${lastY}px`;
   }
-}, 2000);
+  
+  // Begin the continuous traversal loop
+  setInterval(executeCrawlIteration, 3000);
+});
