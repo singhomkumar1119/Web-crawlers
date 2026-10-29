@@ -1,51 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viral Reels Web Crawler</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Spider Crawler</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #0b1020; }
+
+    .spider {
+      position: fixed;
+      width: 44px;
+      height: 44px;
+      transform-origin: center;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .body {
+      position: absolute;
+      inset: 12px;
+      background: #111;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(0,0,0,.6);
+    }
+
+    .leg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 22px;
+      height: 3px;
+      background: #111;
+      transform-origin: left center;
+    }
+  </style>
 </head>
 <body>
-  
-  <div id="content">
-    <h1 class="target-node">🕷️ Spider AI Crawler</h1>
-    <p class="target-node">Analyzing primary index directory structure...</p>
-    <div class="card target-node">
-      <p class="target-node">Scanning DOM hierarchy nodes for hyperlinks.</p>
-      <a href="#" class="target-node">https://github.com</a>
-    </div>
-    <p class="target-node">Data parsing complete. Proceeding to final repository execution block.</p>
+  <div class="spider" id="spider">
+    <div class="body"></div>
+    <div class="leg" style="transform: rotate(20deg)"></div>
+    <div class="leg" style="transform: rotate(60deg)"></div>
+    <div class="leg" style="transform: rotate(110deg)"></div>
+    <div class="leg" style="transform: rotate(160deg)"></div>
+    <div class="leg" style="transform: rotate(200deg)"></div>
+    <div class="leg" style="transform: rotate(250deg)"></div>
+    <div class="leg" style="transform: rotate(300deg)"></div>
+    <div class="leg" style="transform: rotate(340deg)"></div>
   </div>
 
-  <!-- Procedural Multi-Joint SVG Spider Object -->
-  <div id="crawler-spider">
-    <svg viewBox="0 0 100 100" width="60" height="60">
-      <!-- Silk Dragline Thread -->
-      <line id="silk-thread" x1="50" y1="0" x2="50" y2="40" stroke="#ccc" stroke-width="1.5" />
-      
-      <!-- Spider Abdomen & Head Body -->
-      <ellipse cx="50" cy="55" rx="14" ry="18" fill="#111" />
-      <circle cx="50" cy="38" r="9" fill="#1c1c1c" />
-      
-      <!-- Left Side Jointed Legs -->
-      <path class="leg left-leg-1" d="M 43,38 Q 20,20 10,35" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg left-leg-2" d="M 42,44 Q 15,35 8,55" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg left-leg-3" d="M 42,50 Q 12,55 12,75" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg left-leg-4" d="M 43,56 Q 20,75 22,92" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      
-      <!-- Right Side Jointed Legs -->
-      <path class="leg right-leg-1" d="M 57,38 Q 80,20 90,35" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg right-leg-2" d="M 58,44 Q 85,35 92,55" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg right-leg-3" d="M 58,50 Q 88,55 88,75" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="leg right-leg-4" d="M 57,56 Q 80,75 78,92" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-      
-      <!-- Glowing Eyes -->
-      <circle cx="47" cy="34" r="1.5" fill="#ff3b30" />
-      <circle cx="53" cy="34" r="1.5" fill="#ff3b30" />
-    </svg>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="spider.js"></script>
 </body>
 </html>
